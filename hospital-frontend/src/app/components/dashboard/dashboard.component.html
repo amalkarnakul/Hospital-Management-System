@@ -1,0 +1,42 @@
+<h2>Dashboard</h2>
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="error" style="color:red;">{{ error }}</div>
+
+<div *ngIf="!loading && !error">
+	<div class="grid" style="margin-bottom:16px;">
+		<div class="card">
+			<div class="text-muted">Patients</div>
+			<h1>{{ data?.length || 0 }}</h1>
+		</div>
+		<div class="card">
+			<div class="text-muted">Doctors referenced</div>
+			<h1>{{ uniqueDoctorsCount }}</h1>
+		</div>
+		<div class="card">
+			<div class="text-muted">Upcoming Appointments</div>
+			<h1>{{ data?.length || 0 }}</h1>
+		</div>
+	</div>
+
+	<div class="card">
+		<h3 style="margin-top:0;">Recent Appointments</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Patient</th>
+					<th>Doctor</th>
+					<th>Date</th>
+					<th>Reason</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let item of data">
+					<td>{{ item.patient?.name }}</td>
+					<td>{{ item.doctor?.name }}</td>
+					<td>{{ item.appointment?.appointmentDate }}</td>
+					<td>{{ item.appointment?.reason }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

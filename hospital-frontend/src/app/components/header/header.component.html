@@ -1,0 +1,19 @@
+<header class="header">
+	<div class="header-left">
+		<div class="status-indicator"></div>
+		<strong>Hospital Management</strong>
+	</div>
+	<div class="header-right" *ngIf="currentUser">
+		<div class="user-info">
+			<div class="user-avatar">{{ getUserInitials() }}</div>
+			<div class="user-details">
+				<span class="user-name">{{ getUserName() }}</span>
+				<span class="user-role">{{ getUserRole() }}</span>
+			</div>
+		</div>
+		<button class="logout-btn" (click)="logout()" title="Logout">
+			🚪
+		</button>
+	</div>
+	<small class="connection-status" *ngIf="!currentUser">Connected to API</small>
+</header>

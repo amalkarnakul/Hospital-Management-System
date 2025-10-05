@@ -1,0 +1,23 @@
+<h2>Appointments</h2>
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="error" style="color:red;">{{ error }}</div>
+<table *ngIf="!loading && !error">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Patient ID</th>
+			<th>Doctor ID</th>
+			<th>Date</th>
+			<th>Reason</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let a of appointments">
+			<td>{{ a.id }}</td>
+			<td>{{ a.patientId }}</td>
+			<td>{{ a.doctorId }}</td>
+			<td>{{ a.appointmentDate }}</td>
+			<td>{{ a.reason }}</td>
+		</tr>
+	</tbody>
+</table>

@@ -1,0 +1,168 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="logo">
+        <div class="logo-icon">🏥</div>
+        <h1>Hospital Management</h1>
+      </div>
+      <p class="subtitle">{{ showRegister ? 'Create your account' : 'Sign in to your account' }}</p>
+    </div>
+
+    <!-- Login Form -->
+    <form *ngIf="!showRegister && !showForgotPassword" (ngSubmit)="onLogin()" class="login-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          [(ngModel)]="loginData.email" 
+          name="email"
+          placeholder="Enter your email address"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          [(ngModel)]="loginData.password" 
+          name="password"
+          placeholder="Enter your password"
+          required>
+      </div>
+
+      <div class="error" *ngIf="error">{{ error }}</div>
+
+      <button type="submit" class="btn-primary" [disabled]="isLoading">
+        <span *ngIf="isLoading" class="spinner"></span>
+        {{ isLoading ? 'Signing in...' : 'Sign In' }}
+      </button>
+
+      <div class="form-footer">
+        <p>
+          <a href="#" (click)="toggleForgotPassword(); $event.preventDefault()">Forgot password?</a>
+        </p>
+        <p>Don't have an account? 
+          <a href="#" (click)="toggleForm(); $event.preventDefault()">Sign up</a>
+        </p>
+      </div>
+    </form>
+
+    <!-- Register Form -->
+    <form *ngIf="showRegister" (ngSubmit)="onRegister()" class="login-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input 
+            type="text" 
+            id="fullName" 
+            [(ngModel)]="registerData.fullName" 
+            name="fullName"
+            placeholder="Dr. John Doe"
+            required>
+        </div>
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select id="role" [(ngModel)]="registerData.role" name="role" required>
+            <option value="ADMIN">Administrator</option>
+            <option value="DOCTOR">Doctor</option>
+            <option value="NURSE">Nurse</option>
+            <option value="RECEPTIONIST">Receptionist</option>
+          </select>
+        </div>
+      </div>
+
+
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          [(ngModel)]="registerData.email" 
+          name="email"
+          placeholder="your.email@hospital.com"
+          required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="regPassword">Password</label>
+          <input 
+            type="password" 
+            id="regPassword" 
+            [(ngModel)]="registerData.password" 
+            name="regPassword"
+            placeholder="Create a password"
+            required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            [(ngModel)]="registerData.confirmPassword" 
+            name="confirmPassword"
+            placeholder="Confirm password"
+            required>
+        </div>
+      </div>
+
+      <div class="error" *ngIf="error">{{ error }}</div>
+
+      <button type="submit" class="btn-primary" [disabled]="isLoading">
+        <span *ngIf="isLoading" class="spinner"></span>
+        {{ isLoading ? 'Creating Account...' : 'Create Account' }}
+      </button>
+
+      <div class="form-footer">
+        <p>Already have an account? 
+          <a href="#" (click)="toggleForm(); $event.preventDefault()">Sign in</a>
+        </p>
+      </div>
+    </form>
+
+    <!-- Forgot Password Form -->
+    <form *ngIf="showForgotPassword" (ngSubmit)="onForgotPassword()" class="login-form">
+      <div class="form-group">
+        <label for="forgotEmail">Email Address</label>
+        <input 
+          type="email" 
+          id="forgotEmail" 
+          [(ngModel)]="forgotPasswordEmail" 
+          name="forgotEmail"
+          placeholder="Enter your email address"
+          required>
+      </div>
+
+      <div class="error" *ngIf="error">{{ error }}</div>
+
+      <button type="submit" class="btn-primary" [disabled]="isLoading">
+        <span *ngIf="isLoading" class="spinner"></span>
+        {{ isLoading ? 'Sending...' : 'Send Reset Email' }}
+      </button>
+
+      <div class="form-footer">
+        <p>Remember your password? 
+          <a href="#" (click)="toggleForgotPassword(); $event.preventDefault()">Sign in</a>
+        </p>
+      </div>
+    </form>
+
+    <!-- Demo Login Options -->
+    <div class="demo-section" *ngIf="!showRegister && !showForgotPassword">
+      <div class="divider">
+        <span>Or create a demo account</span>
+      </div>
+      <div class="demo-buttons">
+        <button type="button" class="btn-demo" (click)="loginAsDemo()">
+          🏥 Try Demo Account
+        </button>
+      </div>
+      <p class="demo-note">
+        Demo accounts are automatically created for testing purposes
+      </p>
+    </div>
+  </div>
+</div>

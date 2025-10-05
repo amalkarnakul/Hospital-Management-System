@@ -1,0 +1,22 @@
+<div *ngIf="!isLoginPage">
+	<app-header></app-header>
+	<main class="container">
+		<nav class="nav" *ngIf="isLoggedIn">
+			<a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+				📊 Dashboard
+			</a>
+			<a routerLink="/patients" routerLinkActive="active">
+				👥 Patients
+			</a>
+			<a routerLink="/doctors" routerLinkActive="active">
+				👨‍⚕️ Doctors
+			</a>
+			<a routerLink="/appointments" routerLinkActive="active">
+				📅 Appointments
+			</a>
+		</nav>
+		<router-outlet />
+	</main>
+</div>
+
+<router-outlet *ngIf="isLoginPage" />
